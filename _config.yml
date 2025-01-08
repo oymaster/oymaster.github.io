@@ -4,8 +4,11 @@
 
 # Site
 title: oymaster
-avatar: https://gitee.com/oymaster/img_beg/raw/master/setting/oy_icon.jpg
-favicon: https://gitee.com/oymaster/img_beg/raw/master/setting/oy_icon.jpg
+avatar: 
+  url: https://gitee.com/oymaster/img_beg/raw/master/setting/oy_icon.jpg
+  rounded: true 
+favicon: 
+  url: https://gitee.com/oymaster/img_beg/raw/master/setting/oy_icon.jpg
 subtitle: ''
 description: ''
 keywords:
@@ -17,7 +20,7 @@ timezone: ''
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: https://oymaster.github.io/
+url: https://oymaster.github.io/oymaster.github.io
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
