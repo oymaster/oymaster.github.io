@@ -5,11 +5,7 @@ article:
   type: tech # tech/story
 
 logo:
-  avatar: 
-    url: https://gitee.com/oymaster/img_beg/raw/master/setting/oy_icon.jpg
-    rounded: true 
-  favicon: 
-    url: https://gitee.com/oymaster/img_beg/raw/master/setting/oy_icon.jpg
+  avatar: https://gitee.com/oymaster/img_beg/raw/master/setting/oy_icon.jpg # you can set avatar link in _config.yml or '[https://xxx.png](/about/)'
   subtitle: '睡够八小时 | 嘻嘻' # '文字1 | 文字2' (鼠标放上去会切换到文字2)
 
 # 侧边栏主功能导航菜单
