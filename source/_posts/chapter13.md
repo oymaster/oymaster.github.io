@@ -52,7 +52,7 @@ StrVec &operator=(StrVec &&) noexcept;
 
 ## 2. 左右值、引用
 
-#### a. 引用内存占用
+### a. 引用内存占用
 
 在编译器中如GCC,Clang，MSVC，引用本质其实就是个指针常量，所占空间和指针大小相同。但是现代编译器有优化操作。
 
@@ -75,7 +75,7 @@ a=20;
 
 大多数情况下，例如在类里面有成员是引用对象，则必须得占用空间。
 
-#### **b. 左右值**
+### b. 左右值
 
   * **左值（lvalue）**：
     
@@ -92,7 +92,7 @@ a=20;
       int y = x + 5; // x + 5 是一个右值
       ```
 
-#### c. **引用**
+### c. 引用
 
 左值引用和右值引用在 C++ 中的大小通常是零，因为它们不占用任何额外的内存。它们的存在只是为了提供一种更方便的语法来访问对象。
 
@@ -125,7 +125,7 @@ a=20;
 
 ## 3. Message类
 
-#### Message.h
+### Message.h
 
 ```cpp
 #ifndef MESSAGE_H
@@ -153,7 +153,7 @@ private:
 #endif // MESSAGE_H
 ```
 
-#### Message.cpp
+### Message.cpp
 
 ```cpp
 #include "Message.h"
@@ -207,7 +207,7 @@ void Message::remove_from_Folders() {
 }
 ```
 
-#### Folder.cpp
+### Folder.cpp
 
 ```cpp
 #include "Folder.h"
@@ -259,7 +259,7 @@ void Folder::remMsg(Message *m) {
 }
 ```
 
-#### Folder.h
+### Folder.h
 
 ```cpp
 #ifndef FOLDER_H
@@ -290,10 +290,9 @@ private:
 ```
 
 
-
 ## 4. StrVec类
 
-#### StrVec.h
+### StrVec.h
 
 ```cpp
 #include<vector>
@@ -345,7 +344,7 @@ private:
 };
 ```
 
-#### StrVec.cpp
+### StrVec.cpp
 
 ```cpp
 #include "StrVec.h"
@@ -456,4 +455,5 @@ void StrVec::reallocate(){
     cap=element+newcapacity;
 }
 ```
+
 

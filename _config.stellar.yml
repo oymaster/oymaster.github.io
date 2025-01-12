@@ -309,10 +309,11 @@ footer:
       title: 'email'
       url: mailto:1612251970@qq.com
     comments:
-      icon: '<img src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/942ebbf1a4b91.svg"/>'
-      url: /about/#comments
+      icon: '<i class="far fa-comment-dots"></i>'
+      title: '留言板'
+      url: /about/
     theme:
-      icon: default:theme
+      icon: '<i class="fa fa-adjust"></i>'
       title: '日/夜'
       onclick: 'switchTheme()'
   sitemap:
@@ -330,6 +331,7 @@ footer:
     #   - '[关于本站](/)'
     #   - '[GitHub](/)'
   content: | # 支持 Markdown 格式
+    
     <center>
     <span>
       © 2024
@@ -357,7 +359,12 @@ footer:
     show_runtime();
     </script>
     <span id="runtime_span"> </span>
+    <center>
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     </center>
+    </center>
+    
   # 主题用户越多，开发者维护和更新的积极性就越高，如果您喜欢本主题，请在适当的位置显示主题信息和仓库链接以表支持。
 
 
@@ -554,7 +561,7 @@ plugins:
   # 需在Markdown文件开头加入mathjax: true
   # 推荐使用Pandoc: npm uninstall hexo-renderer-marked --save & npm install hexo-renderer-pandoc --save
   mathjax:
-    enable: # true # 可以在特定文章的 front-matter 中设置 mathjax: true 来开启，也可以在这里设置全局开启
+    enable: true # 可以在特定文章的 front-matter 中设置 mathjax: true 来开启，也可以在这里设置全局开启
     js: https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML
 
   # Mermaid - markdwon to flow chart, seq chart, class chart ...
