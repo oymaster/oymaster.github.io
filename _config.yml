@@ -1,6 +1,7 @@
 # Hexo Configuration
 ## Docs: https://hexo.io/docs/configuration.html
 ## Source: https://github.com/hexojs/hexo/
+google-site-verification: R8zJhyqfDOpOz5YXTZZXzCPBr4zkE16MS9OLnjYxqQ8
 
 # Site
 title: oymaster
@@ -115,3 +116,7 @@ inject:
     - <link rel="stylesheet" href="https://cdn.staticfile.org/lxgw-wenkai-screen-webfont/1.6.0/lxgwwenkaiscreen.css">
     - <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
     - <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+# 自动生成sitemap
+sitemap:
+	path: sitemap.xml
