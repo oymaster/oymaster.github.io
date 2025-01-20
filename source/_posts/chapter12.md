@@ -6,6 +6,30 @@ categories:
 tags:
   - c++
 abbrlink: 27716
+poster:
+  topic: 标题上方的小字
+  headline: 大标题
+  caption: 标题下方的小字
+  color: 标题颜色
+date: 2024-9-12 15:21:54
+updated: 2024-9-12  15:21:54
+description:
+cover:
+banner:
+sticky:
+mermaid:
+katex:
+mathjax:
+topic:
+author:
+references:
+comments:
+indexing:
+breadcrumb:
+leftbar:
+rightbar:
+h1:
+type:
 ---
 # 动态内存和智能指针
 ## 动态内存

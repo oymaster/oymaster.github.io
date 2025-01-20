@@ -2,6 +2,7 @@
 # 基本信息
 title: {{ title }}
 date: {{ date }}
+updated: {{ date }}
 tags: []
 categories: []
 description: # excerpt 也可 

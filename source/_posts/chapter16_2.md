@@ -6,6 +6,30 @@ categories:
 tags:
   - c++
 abbrlink: 12036
+poster:
+  topic: 标题上方的小字
+  headline: 大标题
+  caption: 标题下方的小字
+  color: 标题颜色
+date: 2024-10-1 14:21:55
+updated: 2024-10-1  14:21:55
+description:
+cover:
+banner:
+sticky:
+mermaid:
+katex:
+mathjax:
+topic:
+author:
+references:
+comments:
+indexing:
+breadcrumb:
+leftbar:
+rightbar:
+h1:
+type:
 ---
 # 实现智能指针
 
