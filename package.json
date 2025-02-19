@@ -12,8 +12,11 @@
     "version": "7.3.0"
   },
   "dependencies": {
+    "cnpm": "^9.4.0",
+    "g": "^2.0.1",
     "hexo": "^7.3.0",
     "hexo-abbrlink": "^2.2.1",
+    "hexo-cli": "^4.3.2",
     "hexo-generator-archive": "^2.0.0",
     "hexo-generator-category": "^2.0.0",
     "hexo-generator-index": "^4.0.0",

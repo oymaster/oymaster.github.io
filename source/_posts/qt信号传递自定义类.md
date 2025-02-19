@@ -1,10 +1,9 @@
 ---
-title: qt信号传递自定义类
+title: Qt信号传递自定义类
 tags:
-  - 踩坑
-categories:
   - Qt
-  - 错误记录
+categories:
+  - bug记录
 poster:
   topic: 标题上方的小字
   headline: 大标题
