@@ -4,7 +4,7 @@ categories:
   - 学习记录
   - C++Primer5th
 tags:
-  - c++
+  - C++
 abbrlink: 3836
 poster:
   topic: 标题上方的小字
