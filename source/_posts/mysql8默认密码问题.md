@@ -1,13 +1,15 @@
 ---
 title: Ubuntu 20.04 + mysql 8 默认密码问题
-tags: [MySQL]
-categories: 
+tags:
+  - MySQL
+categories:
   - bug记录
 poster:
   topic: 标题上方的小字
   headline: 大标题
   caption: 标题下方的小字
   color: 标题颜色
+abbrlink: 44849
 date: 2025-02-28 00:04:31
 updated: 2025-02-28 00:04:31
 description:
