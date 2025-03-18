@@ -19,7 +19,7 @@ timezone: ''
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
+url: http://oymaster.github.io
 #permalink: :year/:month/:day/:title/
 permalink: posts/:abbrlink.html  # posts 是可以自定义的前缀
 permalink_defaults:
@@ -102,13 +102,12 @@ ignore:
 
 # Extensions
 plugins:
-    hexo-generator-feed
+  hexo-generator-feed
 #Feed Atom
-#设置RSS订阅功能
 feed:
-    type: rss 
-    path: rss.xml # 生成的文件名
-    limit: 20 # 选取推送的文章数量
+  type: atom
+  path: atom.xml
+  limit: 20
     
 ## Themes: https://hexo.io/themes/
 theme: stellar
