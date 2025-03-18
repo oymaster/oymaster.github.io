@@ -1,7 +1,7 @@
 ---
 title: Linux文件目录理解
 tags: []
-categories: 
+categories:
   - 学习记录
   - Linux
 poster:
@@ -9,6 +9,7 @@ poster:
   headline: 大标题
   caption: 标题下方的小字
   color: 标题颜色
+abbrlink: 58113
 date: 2025-03-16 22:32:22
 updated: 2025-03-16 22:32:22
 description:
