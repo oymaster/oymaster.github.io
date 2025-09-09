@@ -4,7 +4,7 @@
   --fsh2: calc(var(--fsp) + 11px);
   --fsh3: calc(var(--fsp) + 7px);
   --fsh4: calc(var(--fsp) + 4px);
-  --side-content-width: 180px;
+  --side-content-width: 224px;
   --gap-margin: 16px;
   --gap-padding: 16px;
   --gap-p: calc(17px + 4px);
