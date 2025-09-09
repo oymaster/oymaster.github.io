@@ -1,0 +1,756 @@
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <meta name="google-site-verification" content="R8zJhyqfDOpOz5YXTZZXzCPBr4zkE16MS9OLnjYxqQ8" />
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.29.1" theme-name="Stellar" theme-version="1.29.1">
+  
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  
+  <title>C++中的sort与自定义排序 - oymaster</title>
+
+  
+    <meta name="description" content="C++中的sort与自定义排序  基本使用与原理 std::sort 是一个模板函数，常见签名如下： 12345template&lt;class RandomIt&gt;void sort(RandomIt first, RandomIt last);template&lt;class RandomIt, class Compare&gt;void sort(RandomIt first, R">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++中的sort与自定义排序">
+<meta property="og:url" content="http://oymaster.github.io/posts/40200.html">
+<meta property="og:site_name" content="oymaster">
+<meta property="og:description" content="C++中的sort与自定义排序  基本使用与原理 std::sort 是一个模板函数，常见签名如下： 12345template&lt;class RandomIt&gt;void sort(RandomIt first, RandomIt last);template&lt;class RandomIt, class Compare&gt;void sort(RandomIt first, R">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-08-01T03:14:48.000Z">
+<meta property="article:modified_time" content="2025-08-01T03:14:59.000Z">
+<meta property="article:author" content="oymaster">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+  
+  
+  
+  <meta name="keywords" content="C++">
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="oymaster" type="application/atom+xml">
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.29.1">
+
+  
+    <link rel="shortcut icon" href="https://pub-e575a4be91854c8e8b675e7e977ed21f.r2.dev/oy_icon.jpg">
+  
+
+  
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/lxgw-wenkai-screen-webfont/1.6.0/lxgwwenkaiscreen.css"><link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+<body>
+
+<div class="l_body s:aa content tech" id="start" layout="post" ><aside class="l_left"><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://pub-e575a4be91854c8e8b675e7e977ed21f.r2.dev/oy_icon.jpg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">oymaster</div><div class="sub cap">记录我的美好生活</div></a></div></header>
+
+<div class="nav-area">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" placeholder="站内搜索"></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+<nav class="menu dis-select"><a class="nav-item active" title="博客" href="/"><span>博客</span></a><a class="nav-item" title="文档" href="/wiki/"><span>文档</span></a><a class="nav-item" title="时刻" href="/moments/"><span>时刻</span></a><a class="nav-item" title="更多" href="/explore/"><span>更多</span></a></nav>
+</div>
+<div class="widgets">
+
+
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/posts/45463.html"><span class="title">深入理解动态规划（一）</span></a><a class="item title" href="/posts/5015.html"><span class="title">cursor踩坑记录</span></a><a class="item title" href="/posts/40200.html"><span class="title">C++中的sort与自定义排序</span></a><a class="item title" href="/posts/15575.html"><span class="title">算法设计与复杂度分析2025试卷</span></a><a class="item title" href="/posts/30335.html"><span class="title">linux常用命令</span></a><a class="item title" href="/posts/58113.html"><span class="title">Linux文件目录理解</span></a><a class="item title" href="/posts/46132.html"><span class="title">单例模式</span></a><a class="item title" href="/posts/44849.html"><span class="title">Ubuntu 20.04 + mysql 8 默认密码问题</span></a><a class="item title" href="/posts/34206.html"><span class="title">redis常用命令</span></a><a class="item title" href="/posts/32845.html"><span class="title">protobuf安装</span></a></div></widget>
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" title="Github" href="https://github.com/oymaster" target="_blank" rel="external nofollow noopener noreferrer"><i class="fab fa-github" /></i></a><a class="social" title="抖音" href="https://www.douyin.com/user/MS4wLjABAAAArICeKxNTBd7qRn0g0BXbbwxtz8nDVz6GtoewhkbybtHbQNmmE1OiYqKnfflGUOQB?from_tab_name=main" target="_blank" rel="external nofollow noopener noreferrer"><i class="fab fa-tiktok"></i></a><a class="social" title="email" href="mailto:1612251970@qq.com" rel="noopener noreferrer"><i class="fas fa-envelope"></i></a><a class="social" title="留言板" href="/about/" rel="noopener noreferrer"><i class="far fa-comment-dots"></i></a><a class="social" title="日/夜" onclick="switchTheme()"><i class="fa fa-adjust"></i></a></div></footer>
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</a> <span class="sep"></span> <a class="cap breadcrumb-link" href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/C/">C++</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2025-08-01T03:14:48.000Z">2025-08-01</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2025-08-01T03:14:59.000Z">2025-08-01</time></span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>C++中的sort与自定义排序</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div><article class="md-text content"><h1 id="c中的sort与自定义排序"><a class="markdownIt-Anchor" href="#c中的sort与自定义排序"></a> C++中的sort与自定义排序</h1>
+<h2 id="基本使用与原理"><a class="markdownIt-Anchor" href="#基本使用与原理"></a> 基本使用与原理</h2>
+<p>std::sort 是一个模板函数，常见签名如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">class</span> RandomIt&gt;</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">sort</span><span class="params">(RandomIt first, RandomIt last)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">class</span> RandomIt, <span class="keyword">class</span> Compare&gt;</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">sort</span><span class="params">(RandomIt first, RandomIt last, Compare comp)</span></span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>first**,** last：指定排序范围的随机访问迭代器。</li>
+<li>comp：可选的比较器，定义元素顺序，默认为 std::less<T>（基于 operator&lt; 的升序排序）。</li>
+<li><strong>时间复杂度</strong>：平均和最坏情况均为 O(n log n)。</li>
+<li><strong>空间复杂度</strong>：通常为 O(log n)，用于递归栈或临时缓冲区。</li>
+<li><strong>要求</strong>：比较器必须满足严格弱序（strict weak ordering），否则可能导致未定义行为。</li>
+</ul>
+<h3 id="核心算法内省排序introsort"><a class="markdownIt-Anchor" href="#核心算法内省排序introsort"></a> 核心算法：内省排序（Introsort）</h3>
+<p>C++ 标准未强制指定 std::sort 的实现算法，但大多数现代标准库（如 libstdc++、libc++）采用 <strong>内省排序（Introsort）</strong>。Introsort 由 David Musser 于 1997 年提出，是一种混合排序算法，结合了快速排序（Quicksort）、堆排序（Heapsort）和插入排序（Insertion Sort）的优点，以兼顾效率和鲁棒性。</p>
+<h4 id="1-快速排序"><a class="markdownIt-Anchor" href="#1-快速排序"></a> 1. 快速排序</h4>
+<p>快速排序是 Introsort 的主要算法，步骤如下：</p>
+<ul>
+<li><strong>选择基准（pivot）</strong>：通常使用三数取中（median-of-three，选取首、尾、中间元素的中位数）或随机选择。</li>
+<li><strong>分区（partition）</strong>：将元素分为小于等于基准和大于基准的两部分。</li>
+<li><strong>递归</strong>：对两个子区间递归排序。</li>
+<li><strong>特点</strong>：
+<ul>
+<li>平均时间复杂度：O(n log n)。</li>
+<li>最坏情况（如已排序或逆序数组）：O(n²)。</li>
+<li>优化：三数取中或随机化基准减少最坏情况概率。</li>
+</ul>
+</li>
+<li><strong>实现细节</strong>：
+<ul>
+<li>分区方案：常用 Lomuto 或 Hoare 分区算法。</li>
+<li>基准选择：三数取中避免极端情况（如已排序输入）。</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-堆排序"><a class="markdownIt-Anchor" href="#2-堆排序"></a> 2. 堆排序</h4>
+<p>当快速排序的递归深度超过阈值（通常为 2 * log n），Introsort 切换到堆排序，以避免快速排序的最坏情况。</p>
+<ul>
+<li><strong>步骤</strong>：
+<ul>
+<li>构建最大堆（或最小堆，取决于排序顺序）。</li>
+<li>反复将堆顶元素移到末尾并调整堆。</li>
+</ul>
+</li>
+<li><strong>特点</strong>：
+<ul>
+<li>时间复杂度：始终为 O(n log n)。</li>
+<li>空间复杂度：O(1)（原地排序）。</li>
+<li>适合处理快速排序退化的场景。</li>
+</ul>
+</li>
+<li><strong>实现细节</strong>：
+<ul>
+<li>使用数组表示堆，通过下标计算父子节点关系。</li>
+<li>堆调整（sift-down）确保堆性质。</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-插入排序"><a class="markdownIt-Anchor" href="#3-插入排序"></a> 3. 插入排序</h4>
+<p>当子区间大小较小时（通常 &lt; 16 或 32 个元素，具体阈值依实现而定），Introsort 切换到插入排序。</p>
+<ul>
+<li><strong>步骤</strong>：
+<ul>
+<li>逐个将元素插入到已排序的子序列中。</li>
+</ul>
+</li>
+<li><strong>特点</strong>：
+<ul>
+<li>时间复杂度：O(n²)，但在小数组上常数开销低。</li>
+<li>适合部分有序或小规模数据。</li>
+</ul>
+</li>
+<li><strong>实现细节</strong>：
+<ul>
+<li>通常通过循环实现，避免递归。</li>
+<li>常用于优化小规模子区间的排序。</li>
+</ul>
+</li>
+</ul>
+<h4 id="原因"><a class="markdownIt-Anchor" href="#原因"></a> 原因：</h4>
+<ul>
+<li><strong>快速排序</strong>：平均性能优异，但在最坏情况下（如已排序或重复元素）退化为 O(n²)。</li>
+<li><strong>堆排序</strong>：保证最坏情况 O(n log n)，但平均性能稍逊，且堆调整开销较高。</li>
+<li><strong>插入排序</strong>：在小规模数据上高效，减少递归开销。 Introsort 动态切换算法，确保：</li>
+<li><strong>高效性</strong>：利用快速排序的平均性能。</li>
+<li><strong>鲁棒性</strong>：通过堆排序避免最坏情况。</li>
+<li><strong>优化性</strong>：插入排序处理小数组。</li>
+</ul>
+<h2 id="自定义排序"><a class="markdownIt-Anchor" href="#自定义排序"></a> 自定义排序</h2>
+<h3 id="1-函数指针"><a class="markdownIt-Anchor" href="#1-函数指针"></a> 1. 函数指针</h3>
+<p>定义一个独立的比较函数，签名需为<code>bool(T, T)</code>：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">compare</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a &gt; b; <span class="comment">// 降序排序</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">std::vector&lt;<span class="type">int</span>&gt; vec = &#123;<span class="number">5</span>, <span class="number">2</span>, <span class="number">9</span>, <span class="number">1</span>, <span class="number">5</span>&#125;;</span><br><span class="line">std::<span class="built_in">sort</span>(vec.<span class="built_in">begin</span>(), vec.<span class="built_in">end</span>(), compare); <span class="comment">// 结果为 &#123;9, 5, 5, 2, 1&#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-静态成员函数"><a class="markdownIt-Anchor" href="#2-静态成员函数"></a> 2. 静态成员函数</h3>
+<p>在类中定义静态比较函数，避免依赖对象实例：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Sorter</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">static</span> <span class="type">bool</span> <span class="title">compare</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a &gt; b; <span class="comment">// 降序排序</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">std::vector&lt;<span class="type">int</span>&gt; vec = &#123;<span class="number">5</span>, <span class="number">2</span>, <span class="number">9</span>, <span class="number">1</span>, <span class="number">5</span>&#125;;</span><br><span class="line">std::<span class="built_in">sort</span>(vec.<span class="built_in">begin</span>(), vec.<span class="built_in">end</span>(), Sorter::compare);</span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong>：非静态成员函数因隐含<code>this</code>指针，签名不匹配<code>std::sort</code>的要求，因此无法直接使用。</p>
+<h3 id="3-使用函数对象"><a class="markdownIt-Anchor" href="#3-使用函数对象"></a> 3. 使用函数对象</h3>
+<p>通过定义一个类并重载<code>operator()</code>，可以在比较器中存储状态：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Comparator</span> &#123;</span><br><span class="line">    <span class="type">int</span> threshold;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Comparator</span>(<span class="type">int</span> t) : <span class="built_in">threshold</span>(t) &#123;&#125;</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a &gt; threshold &amp;&amp; a &lt; b; <span class="comment">// 仅对大于threshold的元素降序排序</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">std::vector&lt;<span class="type">int</span>&gt; vec = &#123;<span class="number">5</span>, <span class="number">2</span>, <span class="number">9</span>, <span class="number">1</span>, <span class="number">5</span>&#125;;</span><br><span class="line">std::<span class="built_in">sort</span>(vec.<span class="built_in">begin</span>(), vec.<span class="built_in">end</span>(), <span class="built_in">Comparator</span>(<span class="number">3</span>));</span><br></pre></td></tr></table></figure>
+<h3 id="4-使用lambda表达式c11及以上"><a class="markdownIt-Anchor" href="#4-使用lambda表达式c11及以上"></a> 4. 使用Lambda表达式（C++11及以上）</h3>
+<p>Lambda表达式提供了一种简洁的方式定义比较器，并可捕获外部变量：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> threshold = <span class="number">3</span>;</span><br><span class="line">std::vector&lt;<span class="type">int</span>&gt; vec = &#123;<span class="number">5</span>, <span class="number">2</span>, <span class="number">9</span>, <span class="number">1</span>, <span class="number">5</span>&#125;;</span><br><span class="line">std::<span class="built_in">sort</span>(vec.<span class="built_in">begin</span>(), vec.<span class="built_in">end</span>(), [threshold](<span class="type">int</span> a, <span class="type">int</span> b) &#123;</span><br><span class="line">    <span class="keyword">return</span> a &gt; threshold &amp;&amp; a &lt; b;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="5-使用stdfunction"><a class="markdownIt-Anchor" href="#5-使用stdfunction"></a> 5. <strong>使用<code>std::function</code></strong></h3>
+<p>C++11引入的<code>std::function</code>可以包装任何可调用对象（包括函数指针、Lambda、函数对象等），提供更灵活的方式：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;functional&gt;</span></span></span><br><span class="line">std::function&lt;<span class="type">bool</span>(<span class="type">int</span>, <span class="type">int</span>)&gt; comp = [](<span class="type">int</span> a, <span class="type">int</span> b) &#123;</span><br><span class="line">    <span class="keyword">return</span> a &gt; b; <span class="comment">// 降序排序</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">std::vector&lt;<span class="type">int</span>&gt; vec = &#123;<span class="number">5</span>, <span class="number">2</span>, <span class="number">9</span>, <span class="number">1</span>, <span class="number">5</span>&#125;;</span><br><span class="line">std::<span class="built_in">sort</span>(vec.<span class="built_in">begin</span>(), vec.<span class="built_in">end</span>(), comp);</span><br></pre></td></tr></table></figure>
+<p><strong>适用场景</strong>：当需要在运行时动态选择比较器时，<code>std::function</code>非常有用，但会引入少量性能开销。</p>
+<h3 id="6-使用标准比较器如stdgreater-stdless"><a class="markdownIt-Anchor" href="#6-使用标准比较器如stdgreater-stdless"></a> 6. <strong>使用标准比较器（如<code>std::greater</code>、<code>std::less</code>）</strong></h3>
+<p>C++标准库提供了预定义的比较器（如<code>&lt;functional&gt;</code>中的<code>std::greater</code>和<code>std::less</code>），可直接用于简单排序需求：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;functional&gt;</span></span></span><br><span class="line">std::vector&lt;<span class="type">int</span>&gt; vec = &#123;<span class="number">5</span>, <span class="number">2</span>, <span class="number">9</span>, <span class="number">1</span>, <span class="number">5</span>&#125;;</span><br><span class="line">std::<span class="built_in">sort</span>(vec.<span class="built_in">begin</span>(), vec.<span class="built_in">end</span>(), std::<span class="built_in">greater</span>&lt;<span class="type">int</span>&gt;()); <span class="comment">// 降序排序</span></span><br><span class="line">std::<span class="built_in">sort</span>(vec.<span class="built_in">begin</span>(), vec.<span class="built_in">end</span>(), std::<span class="built_in">less</span>&lt;<span class="type">int</span>&gt;());   <span class="comment">// 升序排序</span></span><br></pre></td></tr></table></figure>
+<p><strong>优点</strong>：无需手动定义比较器，代码简洁，适合常见升序或降序需求。</p>
+<h3 id="7-重载operator"><a class="markdownIt-Anchor" href="#7-重载operator"></a> 7. <strong>重载<code>operator&lt;</code></strong></h3>
+<p>对于自定义结构体或类，可以通过重载<code>operator&lt;</code>来定义默认排序规则，省去显式比较器：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    std::string name;</span><br><span class="line">    <span class="type">int</span> age;</span><br><span class="line">    <span class="type">bool</span> <span class="keyword">operator</span>&lt;(<span class="type">const</span> Person&amp; other) <span class="type">const</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> age &lt; other.age; <span class="comment">// 按年龄升序</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">std::vector&lt;Person&gt; people = &#123;&#123;<span class="string">&quot;Alice&quot;</span>, <span class="number">25</span>&#125;, &#123;<span class="string">&quot;Bob&quot;</span>, <span class="number">30</span>&#125;, &#123;<span class="string">&quot;Charlie&quot;</span>, <span class="number">20</span>&#125;&#125;;</span><br><span class="line">std::<span class="built_in">sort</span>(people.<span class="built_in">begin</span>(), people.<span class="built_in">end</span>()); <span class="comment">// 使用operator&lt;，按年龄升序</span></span><br></pre></td></tr></table></figure>
+<p><strong>适用场景</strong>：当类型有自然的排序规则且不需要多种排序方式时，重载<code>operator&lt;</code>是最简洁的方案。</p>
+<h3 id="自定义结构体或类的排序"><a class="markdownIt-Anchor" href="#自定义结构体或类的排序"></a> 自定义结构体或类的排序</h3>
+<p>当排序对象是自定义结构体或类时，可以结合上述方法。例如，使用Lambda：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">std::vector&lt;Person&gt; people = &#123;&#123;<span class="string">&quot;Alice&quot;</span>, <span class="number">25</span>&#125;, &#123;<span class="string">&quot;Bob&quot;</span>, <span class="number">30</span>&#125;, &#123;<span class="string">&quot;Charlie&quot;</span>, <span class="number">20</span>&#125;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 按名字字典序排序</span></span><br><span class="line">std::<span class="built_in">sort</span>(people.<span class="built_in">begin</span>(), people.<span class="built_in">end</span>(), [](<span class="type">const</span> Person&amp; a, <span class="type">const</span> Person&amp; b) &#123;</span><br><span class="line">    <span class="keyword">return</span> a.name &lt; b.name;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<div class="article-footer fs14">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
+    </div>
+</article>
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/posts/5015.html">cursor踩坑记录</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/posts/15575.html">算法设计与复杂度分析2025试卷</a></div></section></div>
+
+
+
+
+
+
+<footer class="page-footer footnote"><hr><div class="text"><center>
+<span>
+  © 2024
+  <a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/oymaster">oymaster</a>
+  使用 <a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a>
+  创建
+</span>
+<script type="text/javascript">
+function show_runtime() {
+    window.setTimeout("show_runtime()", 1000);
+    X = new Date("1/1/2025 00:00:00 ");
+    Y = new Date();
+    T = (Y.getTime() - X.getTime());
+    M = 24 * 60 * 60 * 1000;
+    a = T / M;
+    A = Math.floor(a);
+    b = (a - A) * 24;
+    B = Math.floor(b);
+    c = (b - B) * 60;
+    C = Math.floor((b - B) * 60);
+    D = Math.floor((c - C) * 60);
+    runtime_span.innerHTML = "⏲️ 本站已运行 " + A + "天|" + B + "小时|" + C + "分|" + D + "秒 ⏲️"
+}
+show_runtime();
+</script>
+<p><span id="runtime_span"> </span></p>
+<center>
+<span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</center>
+</center>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+<div class="widgets">
+
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="auto"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%8E%9F%E7%90%86"><span class="toc-text"> 基本使用与原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E7%AE%97%E6%B3%95%E5%86%85%E7%9C%81%E6%8E%92%E5%BA%8Fintrosort"><span class="toc-text"> 核心算法：内省排序（Introsort）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F"><span class="toc-text"> 1. 快速排序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%A0%86%E6%8E%92%E5%BA%8F"><span class="toc-text"> 2. 堆排序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="toc-text"> 3. 插入排序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F%E5%9B%A0"><span class="toc-text"> 原因：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8E%92%E5%BA%8F"><span class="toc-text"> 自定义排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88"><span class="toc-text"> 1. 函数指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%9D%99%E6%80%81%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0"><span class="toc-text"> 2. 静态成员函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%BD%BF%E7%94%A8%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1"><span class="toc-text"> 3. 使用函数对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E4%BD%BF%E7%94%A8lambda%E8%A1%A8%E8%BE%BE%E5%BC%8Fc11%E5%8F%8A%E4%BB%A5%E4%B8%8A"><span class="toc-text"> 4. 使用Lambda表达式（C++11及以上）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E4%BD%BF%E7%94%A8stdfunction"><span class="toc-text"> 5. 使用std::function</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E4%BD%BF%E7%94%A8%E6%A0%87%E5%87%86%E6%AF%94%E8%BE%83%E5%99%A8%E5%A6%82stdgreater-stdless"><span class="toc-text"> 6. 使用标准比较器（如std::greater、std::less）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E9%87%8D%E8%BD%BDoperator"><span class="toc-text"> 7. 重载operator&lt;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%93%E6%9E%84%E4%BD%93%E6%88%96%E7%B1%BB%E7%9A%84%E6%8E%92%E5%BA%8F"><span class="toc-text"> 自定义结构体或类的排序</span></a></li></ol></li></ol></div><div class="widget-footer">
+
+<a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2c4.714 0 7.071 0 8.535 1.464C22 4.93 22 7.286 22 12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"/><path stroke-linecap="round" stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/></g></svg><span>回到顶部</span></a></div></widget>
+</div></aside><div class='float-panel blur'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+<script type="text/javascript">
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+  };
+  const deps = {
+    jquery: `https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js`,
+    marked: `https://cdn.jsdelivr.net/npm/marked@13.0.1/lib/marked.umd.min.js`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+    
+    onLoading: (el) => {
+      if (el) {
+        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      let retryTimes = 3;
+      utils.onLoading(el);
+      function req() {
+        return new Promise((resolve, reject) => {
+          let status = 0; // 0 等待 1 完成 2 超时
+          let timer = setTimeout(() => {
+            if (status === 0) {
+              status = 2;
+              timer = null;
+              reject('请求超时');
+              if (retryTimes == 0) {
+                onFailure();
+              }
+            }
+          }, 5000);
+          fetch(url).then(function(response) {
+            if (status !== 2) {
+              clearTimeout(timer);
+              resolve(response);
+              timer = null;
+              status = 1;
+            }
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error('Network response was not ok.');
+          }).then(function(data) {
+            retryTimes = 0;
+            utils.onLoadSuccess(el);
+            callback(data);
+          }).catch(function(error) {
+            if (retryTimes > 0) {
+              retryTimes -= 1;
+              setTimeout(() => {
+                req();
+              }, 5000);
+            } else {
+              utils.onLoadFailure(el);
+              onFailure();
+            }
+          });
+        });
+      }
+      req();
+    },
+  };
+</script>
+
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+
+<!-- required -->
+<script src="/js/main.js?v=1.29.1" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    applyThemeToGiscus(theme)
+  }
+
+  const applyThemeToGiscus = (theme) => {
+    theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+
+    const messages = {
+      light: `切换到浅色模式`,
+      dark: `切换到深色模式`,
+      auto: `切换到跟随系统配色`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    }
+  })()
+</script>
+
+
+<!-- optional -->
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/flying-pages@2/flying-pages.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+</script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img`,
+    css: `https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error)';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const els = document.getElementsByClassName('ds-memos');
+    if (els != undefined && els.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://unpkg.com/swiper@10.3.1/swiper-bundle.min.css`);
+      utils.js(`https://unpkg.com/swiper@10.3.1/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+    processEscapes: true
+  }
+});
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  }
+});
+MathJax.Hub.Queue(function() {
+  var all = MathJax.Hub.getAllJax(), i;
+  for(i=0; i < all.length; i += 1) {
+    all[i].SourceElement().parentNode.className += ' has-jax';
+  }
+});
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+
+</div></body></html>

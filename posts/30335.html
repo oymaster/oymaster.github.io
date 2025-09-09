@@ -1,0 +1,1635 @@
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <meta name="google-site-verification" content="R8zJhyqfDOpOz5YXTZZXzCPBr4zkE16MS9OLnjYxqQ8" />
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.29.1" theme-name="Stellar" theme-version="1.29.1">
+  
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  
+  <title>linux常用命令 - oymaster</title>
+
+  
+    <meta name="description" content="Linux 命令总结  1. 文件操作    命令 示例 重要参数 解释（英文全称） 中文解释 参数作用     ls ls -l &#x2F;dir -l, -a, -h, -t List 列出目录内容 -l: 长格式; -a: 显示隐藏文件; -h: 可读单位; -t: 按时间排序   cd cd &#x2F;home&#x2F;user – Change Directory 切换目录 无常用参数，直接跟路径即可   p">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux常用命令">
+<meta property="og:url" content="http://oymaster.github.io/posts/30335.html">
+<meta property="og:site_name" content="oymaster">
+<meta property="og:description" content="Linux 命令总结  1. 文件操作    命令 示例 重要参数 解释（英文全称） 中文解释 参数作用     ls ls -l &#x2F;dir -l, -a, -h, -t List 列出目录内容 -l: 长格式; -a: 显示隐藏文件; -h: 可读单位; -t: 按时间排序   cd cd &#x2F;home&#x2F;user – Change Directory 切换目录 无常用参数，直接跟路径即可   p">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-03-25T02:38:33.000Z">
+<meta property="article:modified_time" content="2025-03-25T02:38:33.000Z">
+<meta property="article:author" content="oymaster">
+<meta name="twitter:card" content="summary">
+  
+  
+  
+  
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="oymaster" type="application/atom+xml">
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.29.1">
+
+  
+    <link rel="shortcut icon" href="https://pub-e575a4be91854c8e8b675e7e977ed21f.r2.dev/oy_icon.jpg">
+  
+
+  
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/lxgw-wenkai-screen-webfont/1.6.0/lxgwwenkaiscreen.css"><link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+<body>
+
+<div class="l_body s:aa content tech" id="start" layout="post" ><aside class="l_left"><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://pub-e575a4be91854c8e8b675e7e977ed21f.r2.dev/oy_icon.jpg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">oymaster</div><div class="sub cap">记录我的美好生活</div></a></div></header>
+
+<div class="nav-area">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" placeholder="站内搜索"></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+<nav class="menu dis-select"><a class="nav-item active" title="博客" href="/"><span>博客</span></a><a class="nav-item" title="文档" href="/wiki/"><span>文档</span></a><a class="nav-item" title="时刻" href="/moments/"><span>时刻</span></a><a class="nav-item" title="更多" href="/explore/"><span>更多</span></a></nav>
+</div>
+<div class="widgets">
+
+
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/posts/45463.html"><span class="title">深入理解动态规划（一）</span></a><a class="item title" href="/posts/5015.html"><span class="title">cursor踩坑记录</span></a><a class="item title" href="/posts/40200.html"><span class="title">C++中的sort与自定义排序</span></a><a class="item title" href="/posts/15575.html"><span class="title">算法设计与复杂度分析2025试卷</span></a><a class="item title" href="/posts/30335.html"><span class="title">linux常用命令</span></a><a class="item title" href="/posts/58113.html"><span class="title">Linux文件目录理解</span></a><a class="item title" href="/posts/46132.html"><span class="title">单例模式</span></a><a class="item title" href="/posts/44849.html"><span class="title">Ubuntu 20.04 + mysql 8 默认密码问题</span></a><a class="item title" href="/posts/34206.html"><span class="title">redis常用命令</span></a><a class="item title" href="/posts/32845.html"><span class="title">protobuf安装</span></a></div></widget>
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" title="Github" href="https://github.com/oymaster" target="_blank" rel="external nofollow noopener noreferrer"><i class="fab fa-github" /></i></a><a class="social" title="抖音" href="https://www.douyin.com/user/MS4wLjABAAAArICeKxNTBd7qRn0g0BXbbwxtz8nDVz6GtoewhkbybtHbQNmmE1OiYqKnfflGUOQB?from_tab_name=main" target="_blank" rel="external nofollow noopener noreferrer"><i class="fab fa-tiktok"></i></a><a class="social" title="email" href="mailto:1612251970@qq.com" rel="noopener noreferrer"><i class="fas fa-envelope"></i></a><a class="social" title="留言板" href="/about/" rel="noopener noreferrer"><i class="far fa-comment-dots"></i></a><a class="social" title="日/夜" onclick="switchTheme()"><i class="fa fa-adjust"></i></a></div></footer>
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</a> <span class="sep"></span> <a class="cap breadcrumb-link" href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/Linux/">Linux</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2025-03-25T02:38:33.000Z">2025-03-25</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2025-03-25T02:38:33.000Z">2025-03-25</time></span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>linux常用命令</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div><article class="md-text content"><h1 id="linux-命令总结"><a class="markdownIt-Anchor" href="#linux-命令总结"></a> Linux 命令总结</h1>
+<h2 id="1-文件操作"><a class="markdownIt-Anchor" href="#1-文件操作"></a> 1. 文件操作</h2>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>示例</th>
+<th>重要参数</th>
+<th>解释（英文全称）</th>
+<th>中文解释</th>
+<th>参数作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ls</td>
+<td>ls -l /dir</td>
+<td>-l, -a, -h, -t</td>
+<td>List</td>
+<td>列出目录内容</td>
+<td>-l: 长格式; -a: 显示隐藏文件; -h: 可读单位; -t: 按时间排序</td>
+</tr>
+<tr>
+<td>cd</td>
+<td>cd /home/user</td>
+<td>–</td>
+<td>Change Directory</td>
+<td>切换目录</td>
+<td>无常用参数，直接跟路径即可</td>
+</tr>
+<tr>
+<td>pwd</td>
+<td>/home/user</td>
+<td>–</td>
+<td>Print Working Directory</td>
+<td>显示当前工作目录</td>
+<td>无参数，直接输出当前路径</td>
+</tr>
+<tr>
+<td>mkdir</td>
+<td>mkdir -p /dir/subdir</td>
+<td>-p</td>
+<td>Make Directory</td>
+<td>创建目录</td>
+<td>-p: 自动创建父目录（若不存在）</td>
+</tr>
+<tr>
+<td>rm</td>
+<td>rm -rf /dir</td>
+<td>-r, -f</td>
+<td>Remove</td>
+<td>删除文件或目录</td>
+<td>-r: 递归删除; -f: 强制删除，不提示</td>
+</tr>
+<tr>
+<td>cp</td>
+<td>cp -r file1 /dir</td>
+<td>-r, -p</td>
+<td>Copy</td>
+<td>复制文件或目录</td>
+<td>-r: 递归复制目录; -p: 保留文件属性（如权限、时间戳）</td>
+</tr>
+<tr>
+<td>mv</td>
+<td>mv file1 file2</td>
+<td>-i</td>
+<td>Move</td>
+<td>移动或重命名文件</td>
+<td>-i: 覆盖前提示</td>
+</tr>
+<tr>
+<td>cat</td>
+<td>cat file.txt</td>
+<td>-n</td>
+<td>Concatenate</td>
+<td>查看文件内容</td>
+<td>-n: 显示行号</td>
+</tr>
+<tr>
+<td>touch</td>
+<td>touch newfile.txt</td>
+<td>-t</td>
+<td>Touch</td>
+<td>创建空文件或更新时间</td>
+<td>-t: 指定时间戳（如 -t 202301011200）</td>
+</tr>
+<tr>
+<td>find</td>
+<td>find / -name “file.txt”</td>
+<td>-name, -type, -size</td>
+<td>Find</td>
+<td>查找文件</td>
+<td>-name: 按文件名; -type: 文件类型; -size: 按大小（如 +10M）</td>
+</tr>
+<tr>
+<td>ln</td>
+<td>ln -s file link</td>
+<td>-s</td>
+<td>Link</td>
+<td>创建链接</td>
+<td>-s: 创建符号链接（软链接）</td>
+</tr>
+<tr>
+<td>stat</td>
+<td>stat file.txt</td>
+<td>–</td>
+<td>Status</td>
+<td>显示文件详细信息</td>
+<td>无常用参数，显示文件元数据（如权限、大小、时间戳）</td>
+</tr>
+<tr>
+<td>file</td>
+<td>file file.txt</td>
+<td>–</td>
+<td>File</td>
+<td>查看文件类型</td>
+<td>无参数，判断文件类型（如文本、二进制）</td>
+</tr>
+<tr>
+<td>diff</td>
+<td>diff file1 file2</td>
+<td>-u</td>
+<td>Difference</td>
+<td>比较文件差异</td>
+<td>-u: 以统一格式输出差异</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-系统监控"><a class="markdownIt-Anchor" href="#2-系统监控"></a> 2. 系统监控</h2>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>示例</th>
+<th>重要参数</th>
+<th>解释（英文全称）</th>
+<th>中文解释</th>
+<th>参数作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>top</td>
+<td>top</td>
+<td>-u</td>
+<td>Table of Processes</td>
+<td>查看实时进程信息</td>
+<td>-u: 指定用户进程（如 -u user）</td>
+</tr>
+<tr>
+<td>htop</td>
+<td>htop</td>
+<td>–</td>
+<td>Hisham’s Top</td>
+<td>更友好的进程查看工具</td>
+<td>无常用参数，图形化交互界面</td>
+</tr>
+<tr>
+<td>ps</td>
+<td>ps aux</td>
+<td>aux -ef</td>
+<td>Process Status</td>
+<td>查看进程状态</td>
+<td>a: 所有终端进程; u: 用户信息; x: 无终端进程; -ef: 完整格式输出</td>
+</tr>
+<tr>
+<td>df</td>
+<td>df -h</td>
+<td>-h, -i</td>
+<td>Disk Free</td>
+<td>查看磁盘空间使用</td>
+<td>-h: 可读单位; -i: 显示 inode 使用情况</td>
+</tr>
+<tr>
+<td>du</td>
+<td>du -sh /dir</td>
+<td>-s, -h, -d</td>
+<td>Disk Usage</td>
+<td>查看目录或文件大小</td>
+<td>-s: 总大小; -h: 可读单位; -d: 指定深度（如 -d 1）</td>
+</tr>
+<tr>
+<td>free</td>
+<td>free -m</td>
+<td>-m, -t</td>
+<td>Free</td>
+<td>查看内存使用情况</td>
+<td>-m: MB 单位; -t: 显示总计行</td>
+</tr>
+<tr>
+<td>uptime</td>
+<td>uptime</td>
+<td>–</td>
+<td>Uptime</td>
+<td>查看系统运行时间</td>
+<td>无参数，显示运行时间、用户数和负载</td>
+</tr>
+<tr>
+<td>vmstat</td>
+<td>vmstat 1 5</td>
+<td>-s</td>
+<td>Virtual Memory Stats</td>
+<td>查看虚拟内存统计</td>
+<td>-s: 显示内存统计表; 数字参数：采样间隔和次数</td>
+</tr>
+<tr>
+<td>iostat</td>
+<td>iostat -x</td>
+<td>-x, -d</td>
+<td>Input/Output Stats</td>
+<td>查看 I/O 统计</td>
+<td>-x: 扩展统计; -d: 只显示设备统计</td>
+</tr>
+<tr>
+<td>lscpu</td>
+<td>lscpu</td>
+<td>–</td>
+<td>List CPU</td>
+<td>查看 CPU 信息</td>
+<td>无参数，显示 CPU 架构、核心数等</td>
+</tr>
+<tr>
+<td>uname</td>
+<td>uname -a</td>
+<td>-a</td>
+<td>Unix Name</td>
+<td>查看系统信息</td>
+<td>-a: 显示所有信息（如内核版本、主机名）</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-权限管理"><a class="markdownIt-Anchor" href="#3-权限管理"></a> 3. 权限管理</h2>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>示例</th>
+<th>重要参数</th>
+<th>解释（英文全称）</th>
+<th>中文解释</th>
+<th>参数作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>chmod</td>
+<td>chmod 755 <a target="_blank" rel="noopener" href="http://file.sh">file.sh</a></td>
+<td>-R</td>
+<td>Change Mode</td>
+<td>修改文件权限</td>
+<td>-R: 递归更改目录权限</td>
+</tr>
+<tr>
+<td>chown</td>
+<td>chown user:group file</td>
+<td>-R</td>
+<td>Change Owner</td>
+<td>修改文件所有者</td>
+<td>-R: 递归更改目录所有者</td>
+</tr>
+<tr>
+<td>sudo</td>
+<td>sudo apt update</td>
+<td>-u</td>
+<td>Superuser Do</td>
+<td>以超级用户权限执行</td>
+<td>-u: 以指定用户运行（如 -u user）</td>
+</tr>
+<tr>
+<td>whoami</td>
+<td>whoami</td>
+<td>–</td>
+<td>Who Am I</td>
+<td>显示当前用户名</td>
+<td>无参数，输出当前登录用户名</td>
+</tr>
+<tr>
+<td>passwd</td>
+<td>passwd</td>
+<td>–</td>
+<td>Password</td>
+<td>修改用户密码</td>
+<td>无常用参数，交互式输入新密码</td>
+</tr>
+<tr>
+<td>chgrp</td>
+<td>chgrp group file</td>
+<td>-R</td>
+<td>Change Group</td>
+<td>修改文件所属组</td>
+<td>-R: 递归更改目录所属组</td>
+</tr>
+<tr>
+<td>umask</td>
+<td>umask 022</td>
+<td>–</td>
+<td>User Mask</td>
+<td>设置默认权限掩码</td>
+<td>无参数，设置新建文件默认权限（如 022 表示新建文件权限为 644）</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-网络相关"><a class="markdownIt-Anchor" href="#4-网络相关"></a> 4. 网络相关</h2>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>示例</th>
+<th>重要参数</th>
+<th>解释（英文全称）</th>
+<th>中文解释</th>
+<th>参数作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ping</td>
+<td>ping <a target="_blank" rel="noopener" href="http://google.com">google.com</a></td>
+<td>-c, -i</td>
+<td>Packet Internet Groper</td>
+<td>测试网络连通性</td>
+<td>-c: 指定包数; -i: 指定发送间隔（如 -i 0.2）</td>
+</tr>
+<tr>
+<td>netstat</td>
+<td>netstat -tuln</td>
+<td>-t, -u, -l, -n</td>
+<td>Network Statistics</td>
+<td>查看网络状态</td>
+<td>-t: TCP; -u: UDP; -l: 监听端口; -n: 数字格式</td>
+</tr>
+<tr>
+<td>curl</td>
+<td>curl -O url</td>
+<td>-O, -I</td>
+<td>Client URL</td>
+<td>下载或请求网页数据</td>
+<td>-O: 下载文件; -I: 只返回头部信息</td>
+</tr>
+<tr>
+<td>wget</td>
+<td>wget -r url</td>
+<td>-r</td>
+<td>Web Get</td>
+<td>下载文件</td>
+<td>-r: 递归下载网站内容</td>
+</tr>
+<tr>
+<td>ifconfig</td>
+<td>ifconfig eth0 up</td>
+<td>up, down</td>
+<td>Interface Config</td>
+<td>配置网络接口</td>
+<td>up: 启用接口; down: 禁用接口</td>
+</tr>
+<tr>
+<td>ssh</td>
+<td>ssh user@host</td>
+<td>-p, -i</td>
+<td>Secure Shell</td>
+<td>远程登录</td>
+<td>-p: 指定端口; -i: 指定私钥文件（如 -i ~/.ssh/key）</td>
+</tr>
+<tr>
+<td>traceroute</td>
+<td>traceroute <a target="_blank" rel="noopener" href="http://google.com">google.com</a></td>
+<td>-n</td>
+<td>Trace Route</td>
+<td>跟踪路由路径</td>
+<td>-n: 不解析主机名，仅显示 IP</td>
+</tr>
+<tr>
+<td>nc</td>
+<td>nc -zv host 80</td>
+<td>-z, -v</td>
+<td>Netcat</td>
+<td>网络调试工具</td>
+<td>-z: 扫描端口; -v: 显示详细信息</td>
+</tr>
+<tr>
+<td>ip</td>
+<td>ip addr show</td>
+<td>addr, link</td>
+<td>IP</td>
+<td>查看或配置网络</td>
+<td>addr: 显示地址; link: 显示接口状态</td>
+</tr>
+<tr>
+<td>ss</td>
+<td>ss -tuln</td>
+<td>-t, -u, -l, -n</td>
+<td>Socket Statistics</td>
+<td>查看套接字状态</td>
+<td>-t: TCP; -u: UDP; -l: 监听; -n: 数字格式</td>
+</tr>
+</tbody>
+</table>
+<h2 id="5-进程管理"><a class="markdownIt-Anchor" href="#5-进程管理"></a> 5. 进程管理</h2>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>示例</th>
+<th>重要参数</th>
+<th>解释（英文全称）</th>
+<th>中文解释</th>
+<th>参数作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>kill</td>
+<td>kill -9 1234</td>
+<td>-9, -15</td>
+<td>Kill</td>
+<td>终止进程</td>
+<td>-9: SIGKILL 强制终止; -15: SIGTERM 优雅终止</td>
+</tr>
+<tr>
+<td>pkill</td>
+<td>pkill -f process_name</td>
+<td>-f, -u</td>
+<td>Process Kill</td>
+<td>按名称终止进程</td>
+<td>-f: 按命令名匹配; -u: 按用户终止（如 -u user）</td>
+</tr>
+<tr>
+<td>nohup</td>
+<td>nohup <a target="_blank" rel="noopener" href="http://script.sh">script.sh</a> &amp;</td>
+<td>–</td>
+<td>No Hang Up</td>
+<td>后台运行不挂断</td>
+<td>无参数，配合 &amp; 在终端关闭后继续运行</td>
+</tr>
+<tr>
+<td>jobs</td>
+<td>jobs</td>
+<td>-l</td>
+<td>Jobs</td>
+<td>查看后台任务</td>
+<td>-l: 显示进程 ID</td>
+</tr>
+<tr>
+<td>bg</td>
+<td>bg %1</td>
+<td>–</td>
+<td>Background</td>
+<td>将任务放入后台</td>
+<td>无参数，配合任务编号（如 %1）</td>
+</tr>
+<tr>
+<td>fg</td>
+<td>fg %1</td>
+<td>–</td>
+<td>Foreground</td>
+<td>将任务调回前台</td>
+<td>无参数，配合任务编号（如 %1）</td>
+</tr>
+<tr>
+<td>nice</td>
+<td>nice -n 10 command</td>
+<td>-n</td>
+<td>Nice</td>
+<td>设置进程优先级</td>
+<td>-n: 指定优先级值（-20 到 19，值越低优先级越高）</td>
+</tr>
+<tr>
+<td>renice</td>
+<td>renice 10 -p 1234</td>
+<td>-p</td>
+<td>Renice</td>
+<td>修改运行进程优先级</td>
+<td>-p: 指定进程 ID</td>
+</tr>
+<tr>
+<td>killall</td>
+<td>killall httpd</td>
+<td>-i</td>
+<td>Kill All</td>
+<td>按名称杀死所有进程</td>
+<td>-i: 交互式确认</td>
+</tr>
+</tbody>
+</table>
+<h2 id="6-文件内容操作"><a class="markdownIt-Anchor" href="#6-文件内容操作"></a> 6. 文件内容操作</h2>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>示例</th>
+<th>重要参数</th>
+<th>解释（英文全称）</th>
+<th>中文解释</th>
+<th>参数作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>grep</td>
+<td>grep -r “text” /dir</td>
+<td>-i, -r, -n</td>
+<td>Global Regular Expression Print</td>
+<td>搜索文件内容</td>
+<td>-i: 忽略大小写; -r: 递归搜索; -n: 显示行号</td>
+</tr>
+<tr>
+<td>sed</td>
+<td>sed ‘s/old/new/g’ file</td>
+<td>-i</td>
+<td>Stream Editor</td>
+<td>流编辑器</td>
+<td>-i: 直接修改文件</td>
+</tr>
+<tr>
+<td>awk</td>
+<td>awk ‘{print $1}’ file</td>
+<td>-F</td>
+<td>Aho, Weinberger, Kernighan</td>
+<td>文本处理工具</td>
+<td>-F: 指定分隔符（如 -F: 以冒号分隔）</td>
+</tr>
+<tr>
+<td>head</td>
+<td>head -n 5 file.txt</td>
+<td>-n</td>
+<td>Head</td>
+<td>显示文件头部</td>
+<td>-n: 指定行数（如 -n 5）</td>
+</tr>
+<tr>
+<td>tail</td>
+<td>tail -n 5 file.txt</td>
+<td>-n, -f</td>
+<td>Tail</td>
+<td>显示文件尾部</td>
+<td>-n: 指定行数; -f: 实时跟踪</td>
+</tr>
+<tr>
+<td>less</td>
+<td>less file.txt</td>
+<td>-N</td>
+<td>Less</td>
+<td>分页查看文件</td>
+<td>-N: 显示行号</td>
+</tr>
+<tr>
+<td>wc</td>
+<td>wc -l file.txt</td>
+<td>-l, -w, -c</td>
+<td>Word Count</td>
+<td>统计行数、字数</td>
+<td>-l: 行数; -w: 单词数; -c: 字符数</td>
+</tr>
+<tr>
+<td>cut</td>
+<td>cut -d: -f1 file.txt</td>
+<td>-d, -f</td>
+<td>Cut</td>
+<td>按字段截取文本</td>
+<td>-d: 指定分隔符; -f: 指定字段（如 -f1 表示第一列）</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>sort file.txt</td>
+<td>-r, -n</td>
+<td>Sort</td>
+<td>排序文件内容</td>
+<td>-r: 逆序; -n: 按数值排序</td>
+</tr>
+<tr>
+<td>uniq</td>
+<td>uniq file.txt</td>
+<td>-c</td>
+<td>Unique</td>
+<td>去除重复行</td>
+<td>-c: 显示每行重复次数</td>
+</tr>
+</tbody>
+</table>
+<h2 id="7-压缩与解压"><a class="markdownIt-Anchor" href="#7-压缩与解压"></a> 7. 压缩与解压</h2>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>示例</th>
+<th>重要参数</th>
+<th>解释（英文全称）</th>
+<th>中文解释</th>
+<th>参数作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tar</td>
+<td>tar -czvf file.tar.gz /dir</td>
+<td>-c, -z, -v, -f</td>
+<td>Tape Archive</td>
+<td>打包与解包</td>
+<td>-c: 创建; -z: gzip 压缩; -v: 显示过程; -f: 指定文件名</td>
+</tr>
+<tr>
+<td>gzip</td>
+<td>gzip file.txt</td>
+<td>-d</td>
+<td>GNU Zip</td>
+<td>压缩文件</td>
+<td>-d: 解压（等同 gunzip）</td>
+</tr>
+<tr>
+<td>gunzip</td>
+<td>gunzip file.txt.gz</td>
+<td>–</td>
+<td>GNU Unzip</td>
+<td>解压文件</td>
+<td>无常用参数，解压 .gz 文件</td>
+</tr>
+<tr>
+<td>zip</td>
+<td>zip -r file.zip /dir</td>
+<td>-r</td>
+<td>Zip</td>
+<td>压缩为 zip 格式</td>
+<td>-r: 递归压缩目录</td>
+</tr>
+<tr>
+<td>unzip</td>
+<td>unzip file.zip</td>
+<td>-l</td>
+<td>Unzip</td>
+<td>解压 zip 文件</td>
+<td>-l: 仅列出文件内容，不解压</td>
+</tr>
+<tr>
+<td>bzip2</td>
+<td>bzip2 file.txt</td>
+<td>-d</td>
+<td>Burrows-Wheeler Zip</td>
+<td>更高压缩比</td>
+<td>-d: 解压（等同 bunzip2）</td>
+</tr>
+</tbody>
+</table>
+<h2 id="8-软件管理"><a class="markdownIt-Anchor" href="#8-软件管理"></a> 8. 软件管理</h2>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>示例</th>
+<th>重要参数</th>
+<th>解释（英文全称）</th>
+<th>中文解释</th>
+<th>参数作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>apt</td>
+<td>apt install package</td>
+<td>install, remove</td>
+<td>Advanced Package Tool</td>
+<td>Debian 系包管理</td>
+<td>install: 安装; remove: 删除软件包</td>
+</tr>
+<tr>
+<td>yum</td>
+<td>yum install package</td>
+<td>install, update</td>
+<td>Yellowdog Updater Modified</td>
+<td>CentOS 包管理</td>
+<td>install: 安装; update: 更新软件包</td>
+</tr>
+<tr>
+<td>dpkg</td>
+<td>dpkg -i package.deb</td>
+<td>-i, -r</td>
+<td>Debian Package</td>
+<td>安装 deb 包</td>
+<td>-i: 安装; -r: 删除</td>
+</tr>
+<tr>
+<td>rpm</td>
+<td>rpm -ivh package.rpm</td>
+<td>-i, -v, -h</td>
+<td>Red Hat Package Manager</td>
+<td>安装 rpm 包</td>
+<td>-i: 安装; -v: 详细信息; -h: 进度条</td>
+</tr>
+<tr>
+<td>snap</td>
+<td>snap install package</td>
+<td>–classic</td>
+<td>Snap</td>
+<td>安装 snap 包</td>
+<td>–classic: 允许访问系统资源</td>
+</tr>
+<tr>
+<td>dnf</td>
+<td>dnf install package</td>
+<td>install, upgrade</td>
+<td>Dandified Yum</td>
+<td>Fedora 包管理</td>
+<td>install: 安装; upgrade: 升级所有包</td>
+</tr>
+</tbody>
+</table>
+<h2 id="9-日志查看"><a class="markdownIt-Anchor" href="#9-日志查看"></a> 9. 日志查看</h2>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>示例</th>
+<th>重要参数</th>
+<th>解释（英文全称）</th>
+<th>中文解释</th>
+<th>参数作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>journalctl</td>
+<td>journalctl -u service</td>
+<td>-u, -f, -n</td>
+<td>Journal Control</td>
+<td>查看系统日志</td>
+<td>-u: 服务日志; -f: 实时跟踪; -n: 指定行数</td>
+</tr>
+<tr>
+<td>dmesg</td>
+<td>dmesg</td>
+<td>grep error</td>
+<td>-T</td>
+<td>Diagnostic Message</td>
+<td>查看内核日志</td>
+</tr>
+<tr>
+<td>last</td>
+<td>last -x</td>
+<td>-x</td>
+<td>Last</td>
+<td>查看登录历史</td>
+<td>-x: 显示系统事件（如关机、重启）</td>
+</tr>
+<tr>
+<td>logrotate</td>
+<td>logrotate -f config</td>
+<td>-f</td>
+<td>Log Rotate</td>
+<td>轮转日志文件</td>
+<td>-f: 强制执行轮转</td>
+</tr>
+</tbody>
+</table>
+<h2 id="10-环境变量管理"><a class="markdownIt-Anchor" href="#10-环境变量管理"></a> 10. 环境变量管理</h2>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>示例</th>
+<th>重要参数</th>
+<th>解释（英文全称）</th>
+<th>中文解释</th>
+<th>参数作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>env</td>
+<td>env</td>
+<td>–</td>
+<td>Environment</td>
+<td>查看环境变量</td>
+<td>无参数，列出所有环境变量</td>
+</tr>
+<tr>
+<td>export</td>
+<td>export VAR=value</td>
+<td>–</td>
+<td>Export</td>
+<td>设置环境变量</td>
+<td>无参数，设置并导出变量到子进程</td>
+</tr>
+<tr>
+<td>unset</td>
+<td>unset VAR</td>
+<td>–</td>
+<td>Unset</td>
+<td>删除环境变量</td>
+<td>无参数，移除指定变量</td>
+</tr>
+<tr>
+<td>set</td>
+<td>set</td>
+<td>–</td>
+<td>Set</td>
+<td>查看所有变量</td>
+<td>无参数，显示环境变量和 shell 函数</td>
+</tr>
+</tbody>
+</table>
+<h2 id="11-用户管理"><a class="markdownIt-Anchor" href="#11-用户管理"></a> 11. 用户管理</h2>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>示例</th>
+<th>重要参数</th>
+<th>解释（英文全称）</th>
+<th>中文解释</th>
+<th>参数作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>useradd</td>
+<td>useradd -m user</td>
+<td>-m, -s</td>
+<td>User Add</td>
+<td>添加用户</td>
+<td>-m: 创建家目录; -s: 指定 shell（如 -s /bin/bash）</td>
+</tr>
+<tr>
+<td>usermod</td>
+<td>usermod -aG group user</td>
+<td>-aG</td>
+<td>User Modify</td>
+<td>修改用户信息</td>
+<td>-aG: 添加用户到组（附加，不覆盖）</td>
+</tr>
+<tr>
+<td>userdel</td>
+<td>userdel -r user</td>
+<td>-r</td>
+<td>User Delete</td>
+<td>删除用户</td>
+<td>-r: 删除用户及其家目录</td>
+</tr>
+<tr>
+<td>groupadd</td>
+<td>groupadd group</td>
+<td>–</td>
+<td>Group Add</td>
+<td>添加用户组</td>
+<td>无常用参数，直接创建组</td>
+</tr>
+<tr>
+<td>id</td>
+<td>id user</td>
+<td>–</td>
+<td>Identity</td>
+<td>查看用户身份</td>
+<td>无参数，显示用户 UID、GID 和组信息</td>
+</tr>
+</tbody>
+</table>
+<h2 id="12-磁盘管理"><a class="markdownIt-Anchor" href="#12-磁盘管理"></a> 12. 磁盘管理</h2>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>示例</th>
+<th>重要参数</th>
+<th>解释（英文全称）</th>
+<th>中文解释</th>
+<th>参数作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fdisk</td>
+<td>fdisk /dev/sda</td>
+<td>-l</td>
+<td>Fixed Disk</td>
+<td>管理磁盘分区</td>
+<td>-l: 列出分区表</td>
+</tr>
+<tr>
+<td>mkfs</td>
+<td>mkfs.ext4 /dev/sda1</td>
+<td>–</td>
+<td>Make Filesystem</td>
+<td>格式化文件系统</td>
+<td>无常用参数，指定文件系统类型（如 ext4）</td>
+</tr>
+<tr>
+<td>mount</td>
+<td>mount /dev/sda1 /mnt</td>
+<td>-t</td>
+<td>Mount</td>
+<td>挂载文件系统</td>
+<td>-t: 指定文件系统类型（如 -t ext4）</td>
+</tr>
+<tr>
+<td>umount</td>
+<td>umount /mnt</td>
+<td>–</td>
+<td>Unmount</td>
+<td>卸载文件系统</td>
+<td>无常用参数，直接卸载挂载点</td>
+</tr>
+<tr>
+<td>lsblk</td>
+<td>lsblk</td>
+<td>-f</td>
+<td>List Block</td>
+<td>列出块设备</td>
+<td>-f: 显示文件系统类型和挂载点</td>
+</tr>
+</tbody>
+</table>
+<h2 id="13-任务调度"><a class="markdownIt-Anchor" href="#13-任务调度"></a> 13. 任务调度</h2>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>示例</th>
+<th>重要参数</th>
+<th>解释（英文全称）</th>
+<th>中文解释</th>
+<th>参数作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cron</td>
+<td>crontab -e</td>
+<td>-e, -l</td>
+<td>Command Run On</td>
+<td>定时任务</td>
+<td>-e: 编辑任务; -l: 列出任务</td>
+</tr>
+<tr>
+<td>at</td>
+<td>at now + 1 hour</td>
+<td>–</td>
+<td>At</td>
+<td>单次定时任务</td>
+<td>无参数，指定执行时间（如 now + 1 hour）</td>
+</tr>
+<tr>
+<td>batch</td>
+<td>batch</td>
+<td>–</td>
+<td>Batch</td>
+<td>批量任务</td>
+<td>无参数，在系统负载低时执行</td>
+</tr>
+</tbody>
+</table>
+<h2 id="14-性能分析"><a class="markdownIt-Anchor" href="#14-性能分析"></a> 14. 性能分析</h2>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>示例</th>
+<th>重要参数</th>
+<th>解释（英文全称）</th>
+<th>中文解释</th>
+<th>参数作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>strace</td>
+<td>strace -p 1234</td>
+<td>-p, -o</td>
+<td>System Trace</td>
+<td>跟踪系统调用</td>
+<td>-p: 指定进程 ID; -o: 输出到文件</td>
+</tr>
+<tr>
+<td>lsof</td>
+<td>lsof -p 1234</td>
+<td>-p, -i</td>
+<td>List Open Files</td>
+<td>列出打开文件</td>
+<td>-p: 指定进程; -i: 显示网络文件</td>
+</tr>
+<tr>
+<td>perf</td>
+<td>perf stat command</td>
+<td>stat, record</td>
+<td>Performance</td>
+<td>性能分析</td>
+<td>stat: 统计性能; record: 记录数据</td>
+</tr>
+<tr>
+<td>sar</td>
+<td>sar -u 1 5</td>
+<td>-u</td>
+<td>System Activity Report</td>
+<td>系统活动报告</td>
+<td>-u: CPU 使用情况; 数字参数：采样间隔和次数</td>
+</tr>
+</tbody>
+</table>
+
+<div class="article-footer fs14">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
+    </div>
+</article>
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/posts/15575.html">算法设计与复杂度分析2025试卷</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/posts/58113.html">Linux文件目录理解</a></div></section></div>
+
+
+
+
+
+
+<footer class="page-footer footnote"><hr><div class="text"><center>
+<span>
+  © 2024
+  <a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/oymaster">oymaster</a>
+  使用 <a style="font-weight: bold;  auto;" target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a>
+  创建
+</span>
+<script type="text/javascript">
+function show_runtime() {
+    window.setTimeout("show_runtime()", 1000);
+    X = new Date("1/1/2025 00:00:00 ");
+    Y = new Date();
+    T = (Y.getTime() - X.getTime());
+    M = 24 * 60 * 60 * 1000;
+    a = T / M;
+    A = Math.floor(a);
+    b = (a - A) * 24;
+    B = Math.floor(b);
+    c = (b - B) * 60;
+    C = Math.floor((b - B) * 60);
+    D = Math.floor((c - C) * 60);
+    runtime_span.innerHTML = "⏲️ 本站已运行 " + A + "天|" + B + "小时|" + C + "分|" + D + "秒 ⏲️"
+}
+show_runtime();
+</script>
+<p><span id="runtime_span"> </span></p>
+<center>
+<span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</center>
+</center>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+<div class="widgets">
+
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="auto"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C"><span class="toc-text"> 1. 文件操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%B3%BB%E7%BB%9F%E7%9B%91%E6%8E%A7"><span class="toc-text"> 2. 系统监控</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86"><span class="toc-text"> 3. 权限管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3"><span class="toc-text"> 4. 网络相关</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86"><span class="toc-text"> 5. 进程管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9%E6%93%8D%E4%BD%9C"><span class="toc-text"> 6. 文件内容操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E5%8E%8B%E7%BC%A9%E4%B8%8E%E8%A7%A3%E5%8E%8B"><span class="toc-text"> 7. 压缩与解压</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E8%BD%AF%E4%BB%B6%E7%AE%A1%E7%90%86"><span class="toc-text"> 8. 软件管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E6%97%A5%E5%BF%97%E6%9F%A5%E7%9C%8B"><span class="toc-text"> 9. 日志查看</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E7%AE%A1%E7%90%86"><span class="toc-text"> 10. 环境变量管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86"><span class="toc-text"> 11. 用户管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86"><span class="toc-text"> 12. 磁盘管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6"><span class="toc-text"> 13. 任务调度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90"><span class="toc-text"> 14. 性能分析</span></a></li></ol></div><div class="widget-footer">
+
+<a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2c4.714 0 7.071 0 8.535 1.464C22 4.93 22 7.286 22 12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"/><path stroke-linecap="round" stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/></g></svg><span>回到顶部</span></a></div></widget>
+</div></aside><div class='float-panel blur'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+<script type="text/javascript">
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+  };
+  const deps = {
+    jquery: `https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js`,
+    marked: `https://cdn.jsdelivr.net/npm/marked@13.0.1/lib/marked.umd.min.js`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+    
+    onLoading: (el) => {
+      if (el) {
+        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      let retryTimes = 3;
+      utils.onLoading(el);
+      function req() {
+        return new Promise((resolve, reject) => {
+          let status = 0; // 0 等待 1 完成 2 超时
+          let timer = setTimeout(() => {
+            if (status === 0) {
+              status = 2;
+              timer = null;
+              reject('请求超时');
+              if (retryTimes == 0) {
+                onFailure();
+              }
+            }
+          }, 5000);
+          fetch(url).then(function(response) {
+            if (status !== 2) {
+              clearTimeout(timer);
+              resolve(response);
+              timer = null;
+              status = 1;
+            }
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error('Network response was not ok.');
+          }).then(function(data) {
+            retryTimes = 0;
+            utils.onLoadSuccess(el);
+            callback(data);
+          }).catch(function(error) {
+            if (retryTimes > 0) {
+              retryTimes -= 1;
+              setTimeout(() => {
+                req();
+              }, 5000);
+            } else {
+              utils.onLoadFailure(el);
+              onFailure();
+            }
+          });
+        });
+      }
+      req();
+    },
+  };
+</script>
+
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+
+<!-- required -->
+<script src="/js/main.js?v=1.29.1" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    applyThemeToGiscus(theme)
+  }
+
+  const applyThemeToGiscus = (theme) => {
+    theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+
+    const messages = {
+      light: `切换到浅色模式`,
+      dark: `切换到深色模式`,
+      auto: `切换到跟随系统配色`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    }
+  })()
+</script>
+
+
+<!-- optional -->
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/flying-pages@2/flying-pages.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+</script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img`,
+    css: `https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error)';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const els = document.getElementsByClassName('ds-memos');
+    if (els != undefined && els.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://unpkg.com/swiper@10.3.1/swiper-bundle.min.css`);
+      utils.js(`https://unpkg.com/swiper@10.3.1/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+    processEscapes: true
+  }
+});
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  }
+});
+MathJax.Hub.Queue(function() {
+  var all = MathJax.Hub.getAllJax(), i;
+  for(i=0; i < all.length; i += 1) {
+    all[i].SourceElement().parentNode.className += ' has-jax';
+  }
+});
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+
+</div></body></html>
